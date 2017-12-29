@@ -1,0 +1,3463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GroupDocs.Signature for Cloud API References",
+    "version": "17.12"
+  },
+  "host": "localhost",
+  "basePath": "/v1",
+  "schemes": [],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/signature/{fileName}/document/info": {
+      "get": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Retrieves document information.",
+        "operationId": "GetDocumentInfo",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "FileName",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The file name."
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The document password."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains information about file format and file size. Includes information about document pages and attachments.",
+            "schema": {
+              "$ref": "#/definitions/DocumentInfo"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/document/info": {
+      "get": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Retrieves document information for document at provided URL.\nRetrieves file from specified URL and tries to detect file type when fileName parameter is not specified.\nSaves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file.\nWhen file with specified name already exists in storage new unique file name will be used for file.",
+        "operationId": "GetDocumentInfoFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The document password."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains information about file format and file size. Includes information about document pages and attachments.",
+            "schema": {
+              "$ref": "#/definitions/DocumentInfo"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/barcodes": {
+      "get": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Retrieves list of supported Barcode type names.",
+        "operationId": "GetBarcodes",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of supported Barcodes.",
+            "schema": {
+              "$ref": "#/definitions/BarcodeCollection"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/qrcodes": {
+      "get": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Retrieves list of supported QR-Code type names.",
+        "operationId": "GetQRCodes",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of supported QR-Codes.",
+            "schema": {
+              "$ref": "#/definitions/QRCodeCollection"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/formats": {
+      "get": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Lists supported file formats.",
+        "operationId": "GetSupportedFormats",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Object which contains list of supported file formats.",
+            "schema": {
+              "$ref": "#/definitions/FormatCollection"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/text": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Text Signature into the Document",
+        "operationId": "PostText",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The Document name."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignTextOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Text Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/text": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Text Signature into the Document",
+        "operationId": "PostTextFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Text Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/image": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Image Signature into the Document",
+        "operationId": "PostImage",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document name"
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Image Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name"
+          },
+          {
+            "type": "string",
+            "name": "Image",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The Image name"
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/image": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Image Signature into the Document provided by URL",
+        "operationId": "PostImageFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Image Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Image",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The Image name"
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/digital": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Digital Signature into the Document",
+        "operationId": "PostDigital",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document name"
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Digital Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name"
+          },
+          {
+            "type": "string",
+            "name": "CertificateFile",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Digital certificate file name."
+          },
+          {
+            "type": "string",
+            "name": "ImageFile",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Image file."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/digital": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Digital Signature into the Document",
+        "operationId": "PostDigitalFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Digital Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "CertificateFile",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Digital certificate file name."
+          },
+          {
+            "type": "string",
+            "name": "ImageFile",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Image file."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/barcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Barcode Signature into the Document",
+        "operationId": "PostBarcode",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The Document name."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Barcode Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/barcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Barcode Signature into the Document provided by URL",
+        "operationId": "PostBarcodeFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Barcode Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/qrcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert QRCode Signature into the Document",
+        "operationId": "PostQRCode",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The Document name."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "QR-Code Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/qrcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert QRCode Signature into the Document provided by URL",
+        "operationId": "PostQRCodeFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "QR-Code Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/stamp": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Stamp Signature into the Document",
+        "operationId": "PostStamp",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The Document name."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Stamp Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/stamp": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Insert Stamp Signature into the Document provided by URL",
+        "operationId": "PostStampFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL to retrieve document."
+          },
+          {
+            "name": "SignOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Stamp Signature Options for corresponding Document Type"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/SignatureDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/verification/text": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the Document with Text Signatures",
+        "operationId": "PostVerificationText",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document name."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/verification/text": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the Document provided by url with Text Signatures",
+        "operationId": "PostVerificationTextFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document provided by url."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/verification/digital": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the Document with Digital Signatures",
+        "operationId": "PostVerificationDigital",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document name."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "CertificateGuid",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Certificate file guid."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/verification/digital": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the Document from url with Digital Signatures",
+        "operationId": "PostVerificationDigitalFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The url of document."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's information.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/verification/barcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the Document with Barcode Signatures",
+        "operationId": "PostVerificationBarcode",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document name."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/verification/barcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the url based Document with Barcode Signatures",
+        "operationId": "PostVerificationBarcodeFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The URL of document."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/{name}/verification/qrcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the Document with Barcode Signatures",
+        "operationId": "PostVerificationQRCode",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The document name."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Folder",
+            "in": "query",
+            "x-nullable": true,
+            "description": "The folder name."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/signature/verification/qrcode": {
+      "post": {
+        "tags": [
+          "signature"
+        ],
+        "summary": "Verify the url based Document with Barcode Signatures",
+        "operationId": "PostVerificationQRCodeFromUrl",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Url",
+            "in": "query",
+            "required": true,
+            "x-nullable": true,
+            "description": "The url of document."
+          },
+          {
+            "name": "VerifyOptionsData",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VerifyOptionsData"
+            },
+            "x-nullable": true,
+            "description": "Verification Options"
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Document password if required."
+          },
+          {
+            "type": "string",
+            "name": "Storage",
+            "in": "query",
+            "description": "The file storage which have to be used."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The object that contains document's verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifiedDocumentResponse"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DocumentInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Size",
+        "DateModified"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Folder": {
+          "type": "string",
+          "description": "File name."
+        },
+        "Extension": {
+          "type": "string",
+          "description": "Extension"
+        },
+        "FileFormat": {
+          "type": "string",
+          "description": "File format."
+        },
+        "Size": {
+          "type": "integer",
+          "description": "Size in bytes.",
+          "format": "int64"
+        },
+        "DateModified": {
+          "type": "string",
+          "description": "Modification date.",
+          "format": "date-time"
+        },
+        "Pages": {
+          "description": "Pages information.",
+          "$ref": "#/definitions/PagesInfo"
+        }
+      },
+      "description": "Describes document information."
+    },
+    "PagesInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "TotalCount"
+      ],
+      "properties": {
+        "TotalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageInfo"
+          }
+        }
+      },
+      "description": "Describes Pages information summary"
+    },
+    "PageInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Number",
+        "Width",
+        "Height",
+        "Angle",
+        "Visible"
+      ],
+      "properties": {
+        "Number": {
+          "type": "integer",
+          "description": "Page number.",
+          "format": "int32"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Page name."
+        },
+        "Width": {
+          "type": "integer",
+          "description": "Page width.",
+          "format": "int32"
+        },
+        "Height": {
+          "type": "integer",
+          "description": "Page height.",
+          "format": "int32"
+        },
+        "Angle": {
+          "type": "integer",
+          "description": "Page angle.",
+          "format": "int32"
+        },
+        "Visible": {
+          "type": "boolean",
+          "description": "Page visibility."
+        }
+      },
+      "description": "Page information."
+    },
+    "BarcodeCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BarcodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BarcodeType"
+          },
+          "description": "List of Barcode Types."
+        }
+      },
+      "description": "Describes collection of supported Barcode types."
+    },
+    "BarcodeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Barcode Type Name"
+        }
+      },
+      "description": "Describes Barcode type."
+    },
+    "QRCodeCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "QRCodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QRCodeType"
+          },
+          "description": "List of QRCode Types."
+        }
+      },
+      "description": "Describes collection of supported QRCode types."
+    },
+    "QRCodeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "QRCode Type Name"
+        }
+      },
+      "description": "Describes QRCode type."
+    },
+    "FormatCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Formats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Format"
+          },
+          "description": "Supported file formats."
+        }
+      },
+      "description": "Describes object which contains list of supported file formats."
+    },
+    "Format": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FileFormat": {
+          "type": "string",
+          "description": "File format."
+        },
+        "Extension": {
+          "type": "string",
+          "description": "File extension."
+        }
+      },
+      "description": "Format description."
+    },
+    "SignTextOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "Left",
+        "Top",
+        "Width",
+        "Height",
+        "LocationMeasureType",
+        "SizeMeasureType",
+        "Stretch",
+        "RotationAngle",
+        "HorizontalAlignment",
+        "VerticalAlignment",
+        "MarginMeasureType",
+        "SignAllPages"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Text of signature"
+            },
+            "Left": {
+              "type": "integer",
+              "description": "Left X position of Signature on Document Page in Measure values (pixels or percent see  LocationMeasureType property)",
+              "format": "int32"
+            },
+            "Top": {
+              "type": "integer",
+              "description": "Top Y Position of Signature on Document Page in Measure values (pixels or percent see  LocationMeasureType property)",
+              "format": "int32"
+            },
+            "Width": {
+              "type": "integer",
+              "description": "Width of Signature area on Document Page in Measure values (pixels or percent see  SizeMeasureType property)",
+              "format": "int32"
+            },
+            "Height": {
+              "type": "integer",
+              "description": "Height of Signature are on Document Page in Measure values (pixels or percent see  SizeMeasureType property)",
+              "format": "int32"
+            },
+            "LocationMeasureType": {
+              "enum": [
+                "Pixels",
+                "Percents",
+                "Millimeters"
+              ],
+              "description": "Measure type (pixels or percent) for Left and Top properties."
+            },
+            "SizeMeasureType": {
+              "enum": [
+                "Pixels",
+                "Percents",
+                "Millimeters"
+              ],
+              "description": "Measure type (pixels or percent) for Width and Height properties."
+            },
+            "Stretch": {
+              "enum": [
+                "None",
+                "PageWidth",
+                "PageHeight",
+                "PageArea"
+              ],
+              "description": "Stretch mode on Document Page"
+            },
+            "RotationAngle": {
+              "type": "integer",
+              "description": "Rotation angle of signature on document page (clockwise).",
+              "format": "int32"
+            },
+            "HorizontalAlignment": {
+              "enum": [
+                "Default",
+                "None",
+                "Left",
+                "Center",
+                "Right"
+              ],
+              "description": "Horizontal alignment of signature on document page."
+            },
+            "VerticalAlignment": {
+              "enum": [
+                "Default",
+                "None",
+                "Top",
+                "Center",
+                "Bottom"
+              ],
+              "description": "Vertical alignment of signature on document page."
+            },
+            "Margin": {
+              "description": "Gets or sets the space between Sign and Document edges.\n(works ONLY if horizontal or vertical alignment are specified).",
+              "$ref": "#/definitions/PaddingData"
+            },
+            "MarginMeasureType": {
+              "enum": [
+                "Pixels",
+                "Percents",
+                "Millimeters"
+              ],
+              "description": "Gets or sets the measure type (pixels or percent) for Margin."
+            },
+            "SignAllPages": {
+              "type": "boolean",
+              "description": "Put signature on all document pages."
+            },
+            "Font": {
+              "description": "Gets or sets the font of signature.",
+              "$ref": "#/definitions/SignatureFontData"
+            },
+            "ForeColor": {
+              "description": "Gets or sets the fore color of signature.",
+              "$ref": "#/definitions/XmlColor"
+            },
+            "BorderColor": {
+              "description": "Gets or sets the border color of signature.",
+              "$ref": "#/definitions/XmlColor"
+            },
+            "BackgroundColor": {
+              "description": "Gets or sets the background color of signature.",
+              "$ref": "#/definitions/XmlColor"
+            }
+          }
+        }
+      ],
+      "description": "Base container class for signature options data"
+    },
+    "PaddingData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "All",
+        "Left",
+        "Top",
+        "Right",
+        "Bottom"
+      ],
+      "properties": {
+        "All": {
+          "type": "integer",
+          "description": "Gets or sets the padding value for all the edges.",
+          "format": "int32"
+        },
+        "Left": {
+          "type": "integer",
+          "description": "Gets or sets the padding value for the left edge.",
+          "format": "int32"
+        },
+        "Top": {
+          "type": "integer",
+          "description": "Gets or sets the padding value for the top edge.",
+          "format": "int32"
+        },
+        "Right": {
+          "type": "integer",
+          "description": "Gets or sets the padding value for the right edge.",
+          "format": "int32"
+        },
+        "Bottom": {
+          "type": "integer",
+          "description": "Gets or sets the padding value for the bottom edge.",
+          "format": "int32"
+        }
+      },
+      "description": "Represents padding or margin information associated with element"
+    },
+    "SignatureFontData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "FontSize",
+        "Bold",
+        "Italic",
+        "Underline"
+      ],
+      "properties": {
+        "FontFamily": {
+          "type": "string",
+          "description": "Font Family Name"
+        },
+        "FontSize": {
+          "type": "number",
+          "description": "Font Size ",
+          "format": "double"
+        },
+        "Bold": {
+          "type": "boolean",
+          "description": "Apply Font Bold Style"
+        },
+        "Italic": {
+          "type": "boolean",
+          "description": "Apply Font Italic Style"
+        },
+        "Underline": {
+          "type": "boolean",
+          "description": "Apply Underline Style"
+        }
+      },
+      "description": "Create instance of SignatureFont class to specify Font properties."
+    },
+    "XmlColor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Alpha"
+      ],
+      "properties": {
+        "Web": {
+          "type": "string",
+          "description": "HTML string color representation"
+        },
+        "Alpha": {
+          "type": "integer",
+          "description": "Alpha component of color structure",
+          "format": "byte"
+        }
+      },
+      "description": "Utility class for  serialization"
+    },
+    "SignOptionsData": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "DocumentPageNumber"
+      ],
+      "properties": {
+        "DocumentPageNumber": {
+          "type": "integer",
+          "description": "Gets or sets a document page number to put signature\nValue starts from 1",
+          "format": "int32"
+        },
+        "OptionsType": {
+          "type": "string",
+          "description": "Internal property that specify the name of Options"
+        }
+      },
+      "description": "Base container class for signature options data"
+    },
+    "SignStampOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "BackgroundColorCropType",
+        "BackgroundImageCropType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignImageOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "OuterLines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StampLineData"
+              },
+              "description": "List of Outer Lines rendered as concentric circles."
+            },
+            "InnerLines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StampLineData"
+              },
+              "description": "List of Inner Lines rendered as set of rectangles."
+            },
+            "BackgroundColor": {
+              "description": "Gets or sets the background color of signature.",
+              "$ref": "#/definitions/XmlColor"
+            },
+            "BackgroundColorCropType": {
+              "enum": [
+                "None",
+                "OuterArea",
+                "MiddleArea",
+                "InnerArea"
+              ],
+              "description": "Gets or sets the background color crop type of signature."
+            },
+            "BackgroundImageCropType": {
+              "enum": [
+                "None",
+                "OuterArea",
+                "MiddleArea",
+                "InnerArea"
+              ],
+              "description": "Gets or sets the background image crop type of signature."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Stamp Signature Options."
+    },
+    "StampLineData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Height",
+        "TextBottomIntent",
+        "TextRepeatType",
+        "Visible"
+      ],
+      "properties": {
+        "Height": {
+          "type": "integer",
+          "description": "Gets or sets the line height on Stamp.",
+          "format": "int32"
+        },
+        "BackgroundColor": {
+          "description": "Gets or sets the background color of signature.",
+          "$ref": "#/definitions/XmlColor"
+        },
+        "Text": {
+          "type": "string",
+          "description": "Gets or sets the text of stamp line."
+        },
+        "Font": {
+          "description": "Get or set Font of Stamp Line text.",
+          "$ref": "#/definitions/SignatureFontData"
+        },
+        "TextColor": {
+          "description": "Gets or sets the text color of signature.",
+          "$ref": "#/definitions/XmlColor"
+        },
+        "TextBottomIntent": {
+          "type": "integer",
+          "description": "Gets or sets the bottom intent of text.",
+          "format": "int32"
+        },
+        "TextRepeatType": {
+          "enum": [
+            "None",
+            "FullTextRepeat",
+            "RepeatWithTruncation"
+          ],
+          "description": "Gets or sets text repeat type."
+        },
+        "OuterBorder": {
+          "description": "Setup Outer Border.",
+          "$ref": "#/definitions/BorderLineData"
+        },
+        "InnerBorder": {
+          "description": "Setup Internal Border.",
+          "$ref": "#/definitions/BorderLineData"
+        },
+        "Visible": {
+          "type": "boolean",
+          "description": "Get and set visibility of Stamp Line."
+        }
+      },
+      "description": "Specify Stamp line properties."
+    },
+    "BorderLineData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Style",
+        "Transparency",
+        "Weight"
+      ],
+      "properties": {
+        "Style": {
+          "enum": [
+            "Default",
+            "Solid",
+            "ShortDash",
+            "ShortDot",
+            "ShortDashDot",
+            "ShortDashDotDot",
+            "Dot",
+            "Dash",
+            "LongDash",
+            "DashDot",
+            "LongDashDot",
+            "LongDashDotDot"
+          ],
+          "description": "Gets or sets the signature border style."
+        },
+        "Transparency": {
+          "type": "number",
+          "description": "Gets or sets the signature border transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+          "format": "double"
+        },
+        "Weight": {
+          "type": "number",
+          "description": "Gets or sets the weight of the signature border. ",
+          "format": "double"
+        },
+        "Color": {
+          "description": "Gets or sets the border color of signature.",
+          "$ref": "#/definitions/XmlColor"
+        }
+      },
+      "description": "Instance to keep Border line properties."
+    },
+    "SignImageOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "Left",
+        "Top",
+        "Width",
+        "Height",
+        "LocationMeasureType",
+        "SizeMeasureType",
+        "RotationAngle",
+        "HorizontalAlignment",
+        "VerticalAlignment",
+        "MarginMeasureType",
+        "Opacity",
+        "SignAllPages"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ImageGuid": {
+              "type": "string",
+              "description": "Gets or sets the signature image file name.\nThis property is used only if ImageStream is not specified."
+            },
+            "Left": {
+              "type": "integer",
+              "description": "Left X position of Signature on Document Page in Measure values (pixels or percent see  LocationMeasureType).\n(works if horizontal alignment is not specified).",
+              "format": "int32"
+            },
+            "Top": {
+              "type": "integer",
+              "description": "Top Y Position of Signature on Document Page in Measure values (pixels or percent see  LocationMeasureType).\n(works if vertical alignment is not specified).",
+              "format": "int32"
+            },
+            "Width": {
+              "type": "integer",
+              "description": "Width of Signature on Document Page in Measure values (pixels or percent see  SizeMeasureType).",
+              "format": "int32"
+            },
+            "Height": {
+              "type": "integer",
+              "description": "Height of Signature on Document Page in Measure values (pixels or percent see  SizeMeasureType).",
+              "format": "int32"
+            },
+            "LocationMeasureType": {
+              "enum": [
+                "Pixels",
+                "Percents",
+                "Millimeters"
+              ],
+              "description": "Measure type (pixels or percent) for Left and Top properties."
+            },
+            "SizeMeasureType": {
+              "enum": [
+                "Pixels",
+                "Percents",
+                "Millimeters"
+              ],
+              "description": "Measure type (pixels or percent) for Width and Height properties."
+            },
+            "RotationAngle": {
+              "type": "integer",
+              "description": "Rotation angle of signature on document page (clockwise).",
+              "format": "int32"
+            },
+            "HorizontalAlignment": {
+              "enum": [
+                "Default",
+                "None",
+                "Left",
+                "Center",
+                "Right"
+              ],
+              "description": "Horizontal alignment of signature on document page."
+            },
+            "VerticalAlignment": {
+              "enum": [
+                "Default",
+                "None",
+                "Top",
+                "Center",
+                "Bottom"
+              ],
+              "description": "Vertical alignment of signature on document page."
+            },
+            "Margin": {
+              "description": "Gets or sets the space between Sign and Document edges.\n(works ONLY if horizontal or vertical alignment are specified).",
+              "$ref": "#/definitions/PaddingData"
+            },
+            "MarginMeasureType": {
+              "enum": [
+                "Pixels",
+                "Percents",
+                "Millimeters"
+              ],
+              "description": "Gets or sets the measure type (pixels or percent) for Margin."
+            },
+            "Opacity": {
+              "type": "number",
+              "description": "Gets or sets the additional opacity for sign image (value from 0.0 (clear) through 1.0 (opaque)).\nBy default the value is 1.0.",
+              "format": "double"
+            },
+            "SignAllPages": {
+              "type": "boolean",
+              "description": "Put signature on all document pages."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Image Sign Options."
+    },
+    "SlidesSignImageOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignImageOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Image Sign Options for Slides Documents."
+    },
+    "PdfSignImageOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignImageOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Image Sign Options for PDF Documents."
+    },
+    "WordsSignImageOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignImageOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Image Sign Options for Words Documents."
+    },
+    "CellsSignImageOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "SheetNumber",
+        "RowNumber",
+        "ColumnNumber"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignImageOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Margin": {
+              "description": "Gets or sets the space between Sign and worksheet edges.\n(works ONLY if horizontal or vertical alignment are specified).",
+              "$ref": "#/definitions/PaddingData"
+            },
+            "SheetNumber": {
+              "type": "integer",
+              "description": "Gets or sets worksheet number for signing.",
+              "format": "int32"
+            },
+            "RowNumber": {
+              "type": "integer",
+              "description": "Gets or sets the top row number of signature (min value is 0).",
+              "format": "int32"
+            },
+            "ColumnNumber": {
+              "type": "integer",
+              "description": "Gets or sets the left column number of signature (min value is 0).",
+              "format": "int32"
+            }
+          }
+        }
+      ],
+      "description": "Represents the Image Sign Options for Cells Documents."
+    },
+    "WordsSignStampOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignStampOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Stamp Signature Options for Cells Documents."
+    },
+    "CellsSignStampOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignStampOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Stamp Signature Options for Cells Documents."
+    },
+    "SlidesSignStampOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignStampOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Stamp Signature Options for Slides Documents."
+    },
+    "PdfSignStampOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignStampOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Stamp Signature Options for Cells Documents."
+    },
+    "SignQRCodeOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "BorderVisiblity",
+        "BorderDashStyle",
+        "BorderWeight",
+        "Opacity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "QRCodeTypeName": {
+              "type": "string",
+              "description": "Get or set QRCode type. Pick one from supported QRCode Types list"
+            },
+            "BorderVisiblity": {
+              "type": "boolean",
+              "description": "Gets or sets the signature border visibility."
+            },
+            "BorderDashStyle": {
+              "enum": [
+                "Dash",
+                "DashDot",
+                "DashDotDot",
+                "DashLongDash",
+                "DashLongDashDot",
+                "RoundDot",
+                "Solid",
+                "SquareDot"
+              ],
+              "description": "Gets or sets the signature border style."
+            },
+            "BorderWeight": {
+              "type": "number",
+              "description": "Gets or sets the weight of the signature border. ",
+              "format": "double"
+            },
+            "Opacity": {
+              "type": "number",
+              "description": "Gets or sets the signature opacity (value from 0.0 (clear) through 1.0 (opaque)).\nBy default the value is 1.0.",
+              "format": "double"
+            }
+          }
+        }
+      ],
+      "description": "Represents the QRCode Signature Options."
+    },
+    "CellsSignQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Signature Options for Cells Documents."
+    },
+    "SlidesSignQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Signature Options for Slides Documents."
+    },
+    "WordsSignQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Signature Options for Cells Documents."
+    },
+    "PdfSignQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Signature Options for Cells Documents."
+    },
+    "SignBarcodeOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "BorderVisiblity",
+        "BorderDashStyle",
+        "BorderWeight",
+        "Opacity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "BarcodeTypeName": {
+              "type": "string",
+              "description": "Get or set Barcode type. Pick one from supported Barcode Types list"
+            },
+            "BorderVisiblity": {
+              "type": "boolean",
+              "description": "Gets or sets the signature border visibility."
+            },
+            "BorderDashStyle": {
+              "enum": [
+                "Dash",
+                "DashDot",
+                "DashDotDot",
+                "DashLongDash",
+                "DashLongDashDot",
+                "RoundDot",
+                "Solid",
+                "SquareDot"
+              ],
+              "description": "Gets or sets the signature border style."
+            },
+            "BorderWeight": {
+              "type": "number",
+              "description": "Gets or sets the weight of the signature border. ",
+              "format": "double"
+            },
+            "Opacity": {
+              "type": "number",
+              "description": "Gets or sets the signature opacity (value from 0.0 (clear) through 1.0 (opaque)).\nBy default the value is 1.0.",
+              "format": "double"
+            }
+          }
+        }
+      ],
+      "description": "Represents the Barcode Signature Options."
+    },
+    "PdfSignBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Signature Options for Cells Documents."
+    },
+    "SlidesSignBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Signature Options for Slides Documents."
+    },
+    "WordsSignBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Signature Options for Cells Documents."
+    },
+    "CellsSignBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Signature Options for Cells Documents."
+    },
+    "SignDigitalOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignImageOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Password": {
+              "type": "string",
+              "description": "Gets or sets the password of digital certificate."
+            },
+            "CertificateGuid": {
+              "type": "string",
+              "description": "Gets or sets the digital certificate file GUID."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Digital Sign Options."
+    },
+    "PdfSignDigitalOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "Visible"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignDigitalOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Reason": {
+              "type": "string",
+              "description": "Gets or sets the reason of signature."
+            },
+            "Contact": {
+              "type": "string",
+              "description": "Gets or sets the signature contact."
+            },
+            "Location": {
+              "type": "string",
+              "description": "Gets or sets the signature location."
+            },
+            "Visible": {
+              "type": "boolean",
+              "description": "Gets or sets the visibility of signature."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Digital Sign Options for PDF Documents."
+    },
+    "CellsSignDigitalOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "SheetNumber",
+        "RowNumber",
+        "ColumnNumber"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignDigitalOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Margin": {
+              "description": "Gets or sets the space between Sign and worksheet edges.\n(works ONLY if horizontal or vertical alignment are specified).",
+              "$ref": "#/definitions/PaddingData"
+            },
+            "SheetNumber": {
+              "type": "integer",
+              "description": "Gets or sets worksheet number for signing.",
+              "format": "int32"
+            },
+            "RowNumber": {
+              "type": "integer",
+              "description": "Gets or sets the top row number of signature (min value is 0).",
+              "format": "int32"
+            },
+            "ColumnNumber": {
+              "type": "integer",
+              "description": "Gets or sets the left column number of signature (min value is 0).",
+              "format": "int32"
+            }
+          }
+        }
+      ],
+      "description": "Represents the Digital Sign Options for Cells Documents."
+    },
+    "WordsSignDigitalOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignDigitalOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Digital Sign Options for Words Documents."
+    },
+    "CellsSignTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "SheetNumber",
+        "RowNumber",
+        "ColumnNumber",
+        "BorderVisiblity",
+        "BorderDashStyle",
+        "BorderTransparency",
+        "BorderWeight",
+        "BackgroundTransparency",
+        "SignatureImplementation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Margin": {
+              "description": "Gets or sets the space between Sign and worksheet edges.\n(works ONLY if horizontal or vertical alignment are specified).",
+              "$ref": "#/definitions/PaddingData"
+            },
+            "SheetNumber": {
+              "type": "integer",
+              "description": "Gets or sets worksheet number for signing.",
+              "format": "int32"
+            },
+            "RowNumber": {
+              "type": "integer",
+              "description": "Gets or sets the top row number of signature (min value is 0).",
+              "format": "int32"
+            },
+            "ColumnNumber": {
+              "type": "integer",
+              "description": "Gets or sets the left column number of signature (min value is 0).",
+              "format": "int32"
+            },
+            "BorderVisiblity": {
+              "type": "boolean",
+              "description": "Gets or sets the signature border visibility."
+            },
+            "BorderDashStyle": {
+              "enum": [
+                "Dash",
+                "DashDot",
+                "DashDotDot",
+                "DashLongDash",
+                "DashLongDashDot",
+                "RoundDot",
+                "Solid",
+                "SquareDot"
+              ],
+              "description": "Gets or sets the signature border style."
+            },
+            "BorderTransparency": {
+              "type": "number",
+              "description": "Gets or sets the signature border transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+              "format": "double"
+            },
+            "BorderWeight": {
+              "type": "number",
+              "description": "Gets or sets the weight of the signature border. ",
+              "format": "double"
+            },
+            "BackgroundTransparency": {
+              "type": "number",
+              "description": "Gets or sets the signature background transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+              "format": "double"
+            },
+            "SignatureImplementation": {
+              "enum": [
+                "TextStamp",
+                "TextAsImage"
+              ],
+              "description": "Gets or sets the type of text signature implementation."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Text Sign Options for Cells Documents."
+    },
+    "PdfSignTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "Opacity",
+        "SignatureID",
+        "SignatureImplementation",
+        "FormTextFieldType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Opacity": {
+              "type": "number",
+              "description": "Gets or sets the signature opacity (value from 0.0 (clear) through 1.0 (opaque)).\nBy default the value is 1.0.",
+              "format": "double"
+            },
+            "SignatureID": {
+              "type": "integer",
+              "description": "Gets or sets the unique ID of signature. It can be used in signature verification options.",
+              "format": "int32"
+            },
+            "SignatureImplementation": {
+              "enum": [
+                "Stamp",
+                "Image",
+                "Annotation",
+                "Sticker",
+                "TextToFormField",
+                "Watermark"
+              ],
+              "description": "Gets or sets the type of text signature implementation."
+            },
+            "FormTextFieldTitle": {
+              "type": "string",
+              "description": "Gets or sets the title of text form field to put text signature into it.\nThis property could be used only with PdfTextSignatureImplementation = TextToFormField."
+            },
+            "FormTextFieldType": {
+              "enum": [
+                "AllTextTypes",
+                "PlainText",
+                "RichText"
+              ],
+              "description": "Gets or sets the type of form field to put text signature into it.\nThis property could be used only with PdfTextSignatureImplementation = TextToFormField.\nValue by default is AllTextTypes."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Text Sign Options for PDF Documents."
+    },
+    "SlidesSignTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "BorderTransparency",
+        "BorderWeight",
+        "BackgroundTransparency",
+        "SignatureImplementation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "BorderTransparency": {
+              "type": "number",
+              "description": "Gets or sets the signature border transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+              "format": "double"
+            },
+            "BorderWeight": {
+              "type": "number",
+              "description": "Gets or sets the weight of the signature border. ",
+              "format": "double"
+            },
+            "BackgroundTransparency": {
+              "type": "number",
+              "description": "Gets or sets the signature background transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+              "format": "double"
+            },
+            "SignatureImplementation": {
+              "enum": [
+                "TextStamp",
+                "TextAsImage"
+              ],
+              "description": "Gets or sets the type of text signature implementation."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Text Sign Options for Slides Documents."
+    },
+    "WordsSignTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "BorderDashStyle",
+        "BorderTransparency",
+        "BorderWeight",
+        "BackgroundTransparency",
+        "SignatureImplementation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "BorderDashStyle": {
+              "enum": [
+                "Default",
+                "Solid",
+                "ShortDash",
+                "ShortDot",
+                "ShortDashDot",
+                "ShortDashDotDot",
+                "Dot",
+                "Dash",
+                "LongDash",
+                "DashDot",
+                "LongDashDot",
+                "LongDashDotDot"
+              ],
+              "description": "Gets or sets the signature border style."
+            },
+            "BorderTransparency": {
+              "type": "number",
+              "description": "Gets or sets the signature border transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+              "format": "double"
+            },
+            "BorderWeight": {
+              "type": "number",
+              "description": "Gets or sets the weight of the signature border. ",
+              "format": "double"
+            },
+            "BackgroundTransparency": {
+              "type": "number",
+              "description": "Gets or sets the signature background transparency (value from 0.0 (opaque) through 1.0 (clear)).",
+              "format": "double"
+            },
+            "SignatureImplementation": {
+              "enum": [
+                "TextStamp",
+                "TextAsImage"
+              ],
+              "description": "Gets or sets the type of text signature implementation."
+            }
+          }
+        }
+      ],
+      "description": "Represents the Text Sign Options for Words Documents."
+    },
+    "SignatureDocumentResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResponse"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Base class for all responses."
+    },
+    "DocumentResponse": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "Code"
+      ],
+      "properties": {
+        "FileName": {
+          "type": "string",
+          "description": "Output File Name."
+        },
+        "Folder": {
+          "type": "string",
+          "description": "Output folder."
+        },
+        "Code": {
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "description": "Response status code."
+        },
+        "Status": {
+          "type": "string",
+          "description": "Response status."
+        }
+      },
+      "description": "Base class for all responses."
+    },
+    "VerifyOptionsData": {
+      "type": "object",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "IsValid"
+      ],
+      "properties": {
+        "IsValid": {
+          "type": "boolean",
+          "description": "Valid property flag"
+        },
+        "DocumentPageNumber": {
+          "type": "integer",
+          "description": "Document Page Number to be verified. If property is not set - all Pages of Document will be verified for first occurrence",
+          "format": "int32"
+        },
+        "PagesSetup": {
+          "description": "Page Options to specify pages to be verified",
+          "$ref": "#/definitions/PagesSetupData"
+        },
+        "Extensions": {
+          "description": "Additional extensions for alternative signature options verification",
+          "$ref": "#/definitions/VerifyExtensionsData"
+        },
+        "OptionsType": {
+          "type": "string",
+          "description": "Internal property that specify the name of Options"
+        }
+      },
+      "description": "Verify Options - keeps options to verify document"
+    },
+    "PagesSetupData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "FirstPage",
+        "LastPage",
+        "OddPages",
+        "EvenPages"
+      ],
+      "properties": {
+        "FirstPage": {
+          "type": "boolean",
+          "description": "Get or set flag to use first document page"
+        },
+        "LastPage": {
+          "type": "boolean",
+          "description": "Get or set flag to use last document page"
+        },
+        "OddPages": {
+          "type": "boolean",
+          "description": "Get or set flag to use odd pages of document"
+        },
+        "EvenPages": {
+          "type": "boolean",
+          "description": "Get or set flag to use even pages of document"
+        },
+        "PageNumbers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Set arbitrary pages of document to use"
+        }
+      },
+      "description": "Describes special pages of Document to work with"
+    },
+    "VerifyExtensionsData": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Verify Extensions - keeps additional verification options for alternative implementations of Signature on Document Page"
+    },
+    "VerifyTextOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "VerifyAllPages"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Specify Signature Text if it should be verified"
+            },
+            "VerifyAllPages": {
+              "type": "boolean",
+              "description": "Flag to verify each Document Page"
+            }
+          }
+        }
+      ],
+      "description": "Verify Text Options - keeps options to verify Text Signature of Document"
+    },
+    "PdfVerifyTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "SignatureID",
+        "SignatureImplementation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "SignatureID": {
+              "type": "integer",
+              "description": "Specify Text Signature ID more than zero if it should be verified",
+              "format": "int32"
+            },
+            "SignatureImplementation": {
+              "enum": [
+                "Stamp",
+                "Image",
+                "Annotation",
+                "Sticker",
+                "TextToFormField",
+                "Watermark"
+              ],
+              "description": "Type of Signature to be verified"
+            }
+          }
+        }
+      ],
+      "description": "Pdf Verify Text Options - keeps options to verify Text Signature of Pdf Document"
+    },
+    "WordsVerifyTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyTextOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Text Verify Options for Words Documents."
+    },
+    "SlidesVerifyTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyTextOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Text Verify Options for Slides Documents."
+    },
+    "CellsVerifyTextOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyTextOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Text Verify Options for Cells Documents."
+    },
+    "VerifyDigitalOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Password": {
+              "type": "string",
+              "description": "Password of Digital Certificate if required"
+            },
+            "CertificateGuid": {
+              "type": "string",
+              "description": "File Guid of Digital Certificate"
+            }
+          }
+        }
+      ],
+      "description": "Verify Digital Options - keeps options to verify Digital Signature of Document"
+    },
+    "PdfVerifyDigitalOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyDigitalOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Reason": {
+              "type": "string",
+              "description": "Reason of Digital Signature to validate"
+            },
+            "Contact": {
+              "type": "string",
+              "description": "Signature Contact to validate"
+            },
+            "Location": {
+              "type": "string",
+              "description": "Signature Location to validate"
+            }
+          }
+        }
+      ],
+      "description": "Pdf Verify Digital Options - keeps options to verify Digital Signature of Pdf Documents"
+    },
+    "WordsVerifyDigitalOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyDigitalOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Comments": {
+              "type": "string",
+              "description": "Comments of Digital Signature to validate."
+            },
+            "SignDateTimeFrom": {
+              "type": "string",
+              "description": "Date and time range of Digital Signature to validate. Null value will be ignored.",
+              "format": "date-time"
+            },
+            "SignDateTimeTo": {
+              "type": "string",
+              "description": "Date and time range of Digital Signature to validate. Null value will be ignored.",
+              "format": "date-time"
+            }
+          }
+        }
+      ],
+      "description": "Words Verify Digital Options - keeps options to verify Digital Signature of Words Documents."
+    },
+    "CellsVerifyDigitalOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyDigitalOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Comments": {
+              "type": "string",
+              "description": "Comments of Digital Signature to validate"
+            },
+            "SignDateTimeFrom": {
+              "type": "string",
+              "description": "Date and time range of Digital Signature to validate. Nullable value will be ignored.",
+              "format": "date-time"
+            },
+            "SignDateTimeTo": {
+              "type": "string",
+              "description": "Date and time range of Digital Signature to validate. Nullable value will be ignored.",
+              "format": "date-time"
+            }
+          }
+        }
+      ],
+      "description": "Cells Verify Digital Options - keeps options to verify Digital Signature of Cells Documents"
+    },
+    "VerifyBarcodeOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "MatchType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "BarcodeTypeName": {
+              "type": "string",
+              "description": "Get or set Barcode Type Name verification."
+            },
+            "MatchType": {
+              "enum": [
+                "Exact",
+                "StartsWith",
+                "EndsWith",
+                "Contains"
+              ],
+              "description": "Get or set Text Match Type verification."
+            }
+          }
+        }
+      ],
+      "description": "Verify Barcode Options - keeps options to verify Barcode Signature of Document"
+    },
+    "WordsVerifyBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Verify Options for Words Documents."
+    },
+    "CellsVerifyBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Verify Options for Cells Documents."
+    },
+    "PdfVerifyBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Pdf Verify Barcode Options - keeps options to verify Barcode Signature of Pdf Document"
+    },
+    "SlidesVerifyBarcodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyBarcodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the Barcode Verify Options for Slides Documents."
+    },
+    "VerifyQRCodeOptionsData": {
+      "type": "null",
+      "discriminator": "Type",
+      "additionalProperties": false,
+      "required": [
+        "MatchType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyTextOptionsData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "QRCodeTypeName": {
+              "type": "string",
+              "description": "Get or set QRCode Type Name verification."
+            },
+            "MatchType": {
+              "enum": [
+                "Exact",
+                "StartsWith",
+                "EndsWith",
+                "Contains"
+              ],
+              "description": "Get or set Text Match Type verification."
+            }
+          }
+        }
+      ],
+      "description": "Verify QRCode Options - keeps options to verify QRCode Signature of Document"
+    },
+    "WordsVerifyQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Verify Options for Words Documents."
+    },
+    "CellsVerifyQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Verify Options for Cells Documents."
+    },
+    "PdfVerifyQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Pdf Verify QRCode Options - keeps options to verify QRCode Signature of Pdf Document"
+    },
+    "SlidesVerifyQRCodeOptionsData": {
+      "type": "null",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/VerifyQRCodeOptionsData"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "Represents the QRCode Verify Options for Slides Documents."
+    },
+    "VerifiedDocumentResponse": {
+      "type": "null",
+      "additionalProperties": false,
+      "required": [
+        "Result"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Result": {
+              "type": "boolean",
+              "description": "Returns result of Verificaiton process"
+            }
+          }
+        }
+      ],
+      "description": "Base class for all responses."
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth": {
+      "type": "oauth2",
+      "flow": "application",
+      "authorizationUrl": "localhost/oauth2/token"
+    },
+    "appsid": {
+      "type": "apiKey",
+      "name": "Appsid",
+      "in": "query"
+    },
+    "signature": {
+      "type": "apiKey",
+      "name": "Signature",
+      "in": "query"
+    }
+  }
+}
