@@ -15,7 +15,7 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
         [Test]
         public void PostVerifyQRCodeTest()
         {
-            var file = TestFiles.SignedPdf01;
+            var file = TestFiles.SignedTextStamp_Pdf01;
             var verifyOptionsData = new PdfVerifyQRCodeOptionsData()
             {
                 DocumentPageNumber = 1,

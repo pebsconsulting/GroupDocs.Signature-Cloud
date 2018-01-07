@@ -86,13 +86,13 @@ OpenAPI spec version: 1.0
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GroupDocs.Signature.Cloud.Sdk\GroupDocs.Signature.Cloud.Sdk.csproj">
-      <Project>{13284d1a-8b08-469a-a58b-5c94b92c68e7}</Project>
-      <Name>GroupDocs.Signature.Cloud.Sdk</Name>
-    </ProjectReference>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <ProjectReference Include="..\GroupDocs.Signature.Cloud.Sdk\GroupDocs.Signature.Cloud.Sdk.csproj">
+      <Project>{070a331c-2621-4831-a2ba-8c51390aa63b}</Project>
+      <Name>GroupDocs.Signature.Cloud.Sdk</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

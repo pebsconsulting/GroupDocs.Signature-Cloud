@@ -50,6 +50,15 @@ namespace GroupDocs.Signature.Cloud.Sdk.Model
         /// Initializes a new instance of the <see cref="Color"/> class with predefined values.
         /// </summary>
         /// <param name="web">String representation web format color</param>
+        public Color(string web)
+        {
+            this.Web = web;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Color"/> class with predefined values.
+        /// </summary>
+        /// <param name="web">String representation web format color</param>
         /// <param name="alpha">Optional alpha value</param>
         public Color(string web, int? alpha)
         {

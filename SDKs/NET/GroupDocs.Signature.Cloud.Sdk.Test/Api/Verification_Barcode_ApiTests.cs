@@ -10,16 +10,16 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
     public class Verification_Barcode_ApiTests : BaseApiTest
     {
         /// <summary>
-        /// Test Verification Post Barcode
+        /// Test Verification Post Barcode - Pdf
         /// </summary>
         [Test]
-        public void PostVerifyBarcodeTest()
+        public void PostVerifyBarcodeTest_Pdf()
         {
-            var file = TestFiles.SignedPdf01;
+            var file = TestFiles.SignedBarcode_Pdf01;
             var verifyOptionsData = new PdfVerifyBarcodeOptionsData()
             {
                 DocumentPageNumber = 1,
-                BarcodeTypeName = "Code128",
+                BarcodeTypeName = "Code39Standard",
                 Text = "12345678",
                 VerifyAllPages = false
             };
@@ -32,7 +32,85 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
             };
 
             var response = SignatureApi.PostVerificationBarcode(request);
-            Assert.IsTrue(!string.IsNullOrEmpty(response.FileName));
+            AssertResponse(response);
+        }
+
+        /// <summary>
+        /// Test Verification Post Barcode - Cells
+        /// </summary>
+        [Test]
+        public void PostVerifyBarcodeTest_Cells()
+        {
+            var file = TestFiles.SignedBarcode_Cells01;
+            var verifyOptionsData = new CellsVerifyBarcodeOptionsData()
+            {
+                DocumentPageNumber = 1,
+                BarcodeTypeName = "Code39Standard",
+                Text = "12345678",
+                VerifyAllPages = false
+            };
+            var request = new PostVerificationBarcodeRequest
+            {
+                Name = file.FileName,
+                VerifyOptionsData = verifyOptionsData,
+                Password = null,
+                Folder = file.Folder
+            };
+
+            var response = SignatureApi.PostVerificationBarcode(request);
+            AssertResponse(response);
+        }
+
+        /// <summary>
+        /// Test Verification Post Barcode - Slides
+        /// </summary>
+        [Test]
+        public void PostVerifyBarcodeTest_Slides()
+        {
+            var file = TestFiles.SignedBarcode_Slides01;
+            var verifyOptionsData = new SlidesVerifyBarcodeOptionsData()
+            {
+                DocumentPageNumber = 1,
+                BarcodeTypeName = "Code39Standard",
+                Text = "12345678",
+                VerifyAllPages = false
+            };
+            var request = new PostVerificationBarcodeRequest
+            {
+                Name = file.FileName,
+                VerifyOptionsData = verifyOptionsData,
+                Password = null,
+                Folder = file.Folder
+            };
+
+            var response = SignatureApi.PostVerificationBarcode(request);
+            AssertResponse(response);
+        }
+
+        /// <summary>
+        /// Test Verification Post Barcode - Words
+        /// </summary>
+        [Test]
+        public void PostVerifyBarcodeTest_Words()
+        {
+            var file = TestFiles.SignedBarcode_Words01;
+            var verifyOptionsData = new WordsVerifyBarcodeOptionsData()
+            {
+                DocumentPageNumber = 1,
+                BarcodeTypeName = "Code39Standard",
+                Text = "12345678",
+                VerifyAllPages = false
+            };
+            var request = new PostVerificationBarcodeRequest
+            {
+                Name = file.FileName,
+                VerifyOptionsData = verifyOptionsData,
+                Password = null,
+                Folder = file.Folder
+            };
+
+            var response = SignatureApi.PostVerificationBarcode(request);
+            AssertResponse(response);
         }
 
         /// <summary>

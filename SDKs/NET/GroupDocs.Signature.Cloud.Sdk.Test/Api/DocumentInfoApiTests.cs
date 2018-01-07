@@ -10,12 +10,56 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
     public class DocumentInfoApiTests : BaseApiTest
     {
         /// <summary>
-        /// Test DocumentInfoTests
+        /// Test GetDocumentInfo
         /// </summary>
         [Test]
         public void DocumentInfoTests()
         {
-            var file = new TestFile("one-page.docx");
+            var file = TestFiles.Words01;
+
+            var request = new GetDocumentInfoRequest
+            {
+                FileName = file.FileName,
+                Password = file.Password,
+                Folder = file.Folder,
+                Storage = null,
+            };
+
+            var response = SignatureApi.GetDocumentInfo(request);
+
+            Assert.AreEqual(file.FileName, response.Name);
+            Assert.AreEqual(1, response.Pages.TotalCount);
+        }
+
+        /// <summary>
+        /// Test GetDocumentInfo with password
+        /// </summary>
+        [Test]
+        public void DocumentInfoTestsPassword()
+        {
+            var file = TestFiles.PdfPwd;
+
+            var request = new GetDocumentInfoRequest
+            {
+                FileName = file.FileName,
+                Password = file.Password,
+                Folder = file.Folder,
+                Storage = null,
+            };
+
+            var response = SignatureApi.GetDocumentInfo(request);
+
+            Assert.AreEqual(file.FileName, response.Name);
+            Assert.AreEqual(1, response.Pages.TotalCount);
+        }
+
+        /// <summary>
+        /// Test DocumentInfoTests
+        /// </summary>
+        [Test]
+        public void DocumentInfoTestsWrongFile()
+        {
+            var file = TestFiles.WrongFile01;
 
             var request = new GetDocumentInfoRequest
             {
@@ -28,7 +72,6 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
             var response = SignatureApi.GetDocumentInfo(request);
 
             Assert.AreEqual(file.FileName, response.Name);
-            Assert.AreEqual(1, response.Pages.TotalCount);
         }
 
         /// <summary>

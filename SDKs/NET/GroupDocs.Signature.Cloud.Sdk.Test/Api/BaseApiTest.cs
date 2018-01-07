@@ -8,6 +8,7 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
 {
     using NUnit.Framework;
     using GroupDocs.Signature.Cloud.Sdk.Api;
+    using GroupDocs.Signature.Cloud.Sdk.Model;
     using GroupDocs.Signature.Cloud.Sdk.Internal;
     using GroupDocs.Signature.Cloud.Sdk.Test.Internal;
 
@@ -101,6 +102,14 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
             var baseDir = Path.Combine(workingDir, "..\\..\\..\\..\\..", "TestData");
 
             return Path.GetFullPath(baseDir);
+        }
+
+        protected void AssertResponse(VerifiedDocumentResponse response)
+        {
+            Assert.IsTrue(!string.IsNullOrEmpty(response.FileName));
+            Assert.AreEqual(response.Code.GetValueOrDefault(DocumentResponse.CodeEnum.InternalServerError), DocumentResponse.CodeEnum.OK);
+            Assert.IsTrue(response.Status.Contains("OK"));
+            Assert.IsTrue(response.Result.GetValueOrDefault());
         }
     }
 }

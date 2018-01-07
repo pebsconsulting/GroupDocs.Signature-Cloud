@@ -10,16 +10,17 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
     public class Verification_Text_ApiTests : BaseApiTest
     {
         /// <summary>
-        /// Test Verification Post Text
+        /// Test Verification Post Text Pdf Stamp
         /// </summary>
         [Test]
-        public void PostVerifyTextTest()
+        public void PostVerifyTextTest_PdfStamp()
         {
-            var file = TestFiles.SignedPdf01;
+            var file = TestFiles.SignedTextStamp_Pdf01;
             var verifyOptionsData = new PdfVerifyTextOptionsData()
             {
                 DocumentPageNumber = 1,
                 Text = "1234567890",
+                SignatureImplementation = PdfVerifyTextOptionsData.SignatureImplementationEnum.Stamp,
                 VerifyAllPages = false
             };
             var request = new PostVerificationTextRequest
@@ -31,7 +32,8 @@ namespace GroupDocs.Signature.Cloud.Sdk.Test.Api
             };
 
             var response = SignatureApi.PostVerificationText(request);
-            Assert.IsTrue(!string.IsNullOrEmpty(response.FileName));
+
+            AssertResponse(response);
         }
 
         /// <summary>
